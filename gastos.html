@@ -3,244 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis gastos | Master Finance</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            background: #000;
-            color: #fff;
-        }
-
-        header {
-            width: 90%;
-            max-width: 1100px;
-            min-height: 200px;
-            margin: 0 auto;
-            padding: 24px 7%;
-            background: #111;
-            border: 2px solid #1d1d1d;
-            border-bottom: none;
-            border-radius: 55px 55px 0 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .marca {
-            font-size: clamp(25px, 5vw, 60px);
-            font-weight: bold;
-            white-space: nowrap;
-        }
-
-        .marca span {
-            color: #ed1c24;
-        }
-
-        .inicio {
-            display: inline-block;
-            background: #ed1c24;
-            color: #fff;
-            text-decoration: none;
-            font-size: clamp(20px, 3.5vw, 42px);
-            padding: 30px 55px;
-            border-radius: 15px;
-            text-align: center;
-        }
-
-        .inicio:hover, button:hover {
-            background: #c9151c;
-        }
-
-        .contenedor {
-            width: 90%;
-            max-width: 700px;
-            margin: 40px auto;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .total, .formulario {
-            background: #151515;
-            padding: 25px;
-            margin-bottom: 25px;
-            border-radius: 8px;
-        }
-
-        .total {
-            border-left: 5px solid #ed1c24;
-        }
-
-        .total h2 {
-            color: #ed1c24;
-            margin-bottom: 10px;
-        }
-
-        .total p {
-            font-size: 30px;
-            font-weight: bold;
-        }
-
-        .formulario h2 {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            background: #222;
-            color: white;
-            border: 1px solid #444;
-            border-radius: 5px;
-        }
-
-        button {
-            width: 100%;
-            padding: 13px;
-            background: #ed1c24;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #aaa;
-            background: #111;
-            margin-top: 40px;
-        }
-
-        @media (max-width: 600px) {
-            header {
-                min-height: 125px;
-                padding: 18px 5%;
-                border-radius: 30px 30px 0 0;
-            }
-
-            .marca {
-                white-space: normal;
-                font-size: clamp(20px, 5vw, 30px);
-            }
-
-            .inicio {
-                padding: 15px 20px;
-                border-radius: 10px;
-            }
-        }
-    </style>
+    <title>Gastos - Master Finance</title>
+    <link rel="stylesheet" href="Estilos/gastos.css">
 </head>
-
-<body>
-
-    <header>
-        <div class="marca">
-            MASTER <span>FINANCE</span>
+<body class="mf-body">
+    <header class="mf-header">
+        <div class="mf-header-left">
+            <a href="pag.principal.html" class="mf-brand">
+                <img class="mf-logo" src="Estilos/logo_master_finance.png" alt="Logo Master Finance">
+                <span class="mf-brand-title">Master Finance</span>
+            </a>
+            <span class="mf-page-badge">Gastos</span>
         </div>
 
-        <a class="inicio" href="pag.principal.html">Inicio</a>
+        <div class="mf-user-area">
+            <div class="mf-user-info">
+                <span>Nombre</span>
+                <img src="Estilos/user-icon.png" alt="Usuario">
+            </div>
+            <ul class="mf-nav-links">
+                <li><a href="perfil.html">Perfil</a></li>
+                <li><a href="index.html">Cerrar Sesión</a></li>
+            </ul>
+        </div>
     </header>
 
-    <main class="contenedor">
+    <div class="mf-layout">
+        <aside class="mf-sidebar">
+            <ul>
+                <li><a href="pag.principal.html">Inicio</a></li>
+                <li><a href="ingresos.html">Ingresos</a></li>
+                <li><a href="gastos.html" class="active">Gastos</a></li>
+                <li><a href="ahorros.html">Ahorros</a></li>
+                <li><a href="metas.html">Metas</a></li>
+                <li><a href="presupuesto.html">Presupuesto</a></li>
+            </ul>
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(239, 68, 68, 0.25);">
+                <a href="pag.principal.html" class="mf-btn mf-btn-outline mf-btn-full">← Página Principal</a>
+            </div>
+        </aside>
 
-        <h1>Mis gastos</h1>
+        <main class="mf-content">
+            <div class="mf-top-bar">
+                <div class="mf-title-group">
+                    <h1>Gastos</h1>
+                    <button type="button" class="mf-btn mf-btn-outline">↑↓ Organizar</button>
+                </div>
+                <a href="#registrar-gasto" class="mf-btn mf-btn-primary">+ Agregar gastos</a>
+            </div>
 
-        <section class="total">
-            <h2>Total de gastos</h2>
-            <p id="total">$0</p>
-        </section>
+            <section class="mf-grid-2">
+                <article class="mf-card mf-card-prioritario">
+                    <div class="mf-card-header">
+                        <h2>Pago de Servicios</h2>
+                        <span class="mf-tag-prioritario">★ Gasto prioritario</span>
+                    </div>
 
-        <section class="formulario">
+                    <div class="mf-form-group">
+                        <label>Total Pagado</label>
+                        <input type="text" class="mf-input" value="$ Total Pagos" readonly>
+                    </div>
 
-            <h2>Agregar gasto</h2>
+                    <div class="mf-actions-row">
+                        <button type="button" class="mf-btn mf-btn-primary">Ver Servicios</button>
+                        <button type="button" class="mf-btn mf-btn-danger">Eliminar</button>
+                    </div>
+                </article>
 
-            <form id="formGasto">
+                <article class="mf-card mf-card-varios">
+                    <div class="mf-card-header">
+                        <h2>Gastos Varios</h2>
+                        <span class="mf-tag-muted">Extras</span>
+                    </div>
 
-                <label for="cantidad">Cantidad</label>
+                    <div class="mf-form-group">
+                        <label>Total Pagado</label>
+                        <input type="text" class="mf-input" value="Suma de todos los extra" readonly>
+                    </div>
 
-                <input
-                    type="number"
-                    id="cantidad"
-                    placeholder="Ingresa la cantidad"
-                    min="0.01"
-                    step="0.01"
-                    required
-                >
+                    <div class="mf-actions-row">
+                        <button type="button" class="mf-btn mf-btn-outline">Ver Gastos Varios</button>
+                    </div>
+                </article>
+            </section>
 
-                <label for="categoria">Categoría del gasto</label>
+            <section id="registrar-gasto" class="mf-card">
+                <h2>Registrar Nuevo Gasto</h2>
+                <form action="php/guardar_gasto.php" method="POST" class="mf-grid-2">
+                    <div>
+                        <div class="mf-form-group">
+                            <label for="gasNombre">Nombre del gasto *</label>
+                            <input type="text" id="gasNombre" name="gasNombre" class="mf-input" placeholder="Ej: Internet" required>
+                        </div>
 
-                <select id="categoria" required>
-                    <option value="">Selecciona una categoría</option>
-                    <option value="Alimentación">Alimentación</option>
-                    <option value="Transporte">Transporte</option>
-                    <option value="Vivienda">Vivienda</option>
-                    <option value="Servicios">Servicios</option>
-                    <option value="Salud">Salud</option>
-                    <option value="Educación">Educación</option>
-                    <option value="Entretenimiento">Entretenimiento</option>
-                    <option value="Otros">Otros</option>
-                </select>
+                        <div class="mf-form-group">
+                            <label for="gasCategoria">Categoría *</label>
+                            <select id="gasCategoria" name="gasCategoria" class="mf-select" required>
+                                <option value="Servicios">Servicios (Gasto prioritario)</option>
+                                <option value="Alimentación">Alimentación</option>
+                                <option value="Transporte">Transporte</option>
+                                <option value="Entretenimiento">Entretenimiento</option>
+                                <option value="Varios">Gastos Varios</option>
+                            </select>
+                        </div>
+                    </div>
 
-                <button type="submit">Agregar gasto</button>
+                    <div>
+                        <div class="mf-form-group">
+                            <label for="gasMonto">Monto ($) *</label>
+                            <input type="number" id="gasMonto" name="gasMonto" class="mf-input" placeholder="50000" min="1" required>
+                        </div>
 
-            </form>
+                        <div class="mf-form-group">
+                            <label for="gasFecha">Fecha *</label>
+                            <input type="date" id="gasFecha" name="gasFecha" class="mf-input" required>
+                        </div>
 
-        </section>
-
-    </main>
-
-    <footer>
-        Organiza, ahorra, crece y alcanza tus metas.
-        <br><br>
-        © 2026 Master Finance
-    </footer>
-
-    <script>
-        let totalGastos = 0;
-
-        const formulario = document.getElementById("formGasto");
-        const cantidad = document.getElementById("cantidad");
-        const categoria = document.getElementById("categoria");
-        const total = document.getElementById("total");
-
-        formulario.addEventListener("submit", function(event) {
-
-            event.preventDefault();
-
-            const valor = Number(cantidad.value);
-
-            if (!Number.isFinite(valor) || valor <= 0 || !categoria.value) {
-                alert("Ingresa una cantidad válida y selecciona una categoría.");
-                return;
-            }
-
-            totalGastos += valor;
-
-            total.textContent =
-                "$" + totalGastos.toLocaleString("es-CO");
-
-            formulario.reset();
-
-        });
-    </script>
-
+                        <button type="submit" class="mf-btn mf-btn-primary mf-btn-full">Guardar Gasto</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
 </body>
 </html>

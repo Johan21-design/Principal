@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Contraseña - Master Finance</title>
+    <link rel="stylesheet" href="Estilos/login.css">
+</head>
+<body class="mf-auth-body">
+    <div class="mf-auth-card">
+        <a href="índice.html" class="mf-auth-brand">
+            <img class="mf-logo" src="Estilos/logo_master_finance.png" alt="Logo Master Finance">
+            <span class="mf-brand-title">Master Finance</span>
+        </a>
+
+        <h1>Recuperar contraseña</h1>
+        <p class="mf-auth-subtitle">Ingresa tu correo para restablecer el acceso</p>
+
+        <form action="php/recuperar_contrasena.php" method="POST">
+            <div class="mf-form-group">
+                <label for="correo">Correo registrado:</label>
+                <input type="email" id="correo" name="correo" class="mf-input" placeholder="correo@ejemplo.com" required>
+            </div>
+
+            <button type="submit" class="mf-btn mf-btn-primary mf-btn-full">Enviar instrucciones</button>
+        </form>
+
+        <p class="mf-auth-footer">
+            <a href="login.html">← Volver a iniciar sesión</a>
+        </p>
+    </div>
+</body>
+</html>

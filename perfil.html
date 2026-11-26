@@ -1,1 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - Master Finance</title>
+    <link rel="stylesheet" href="Estilos/perfil.css">
+</head>
+<body class="mf-body">
+    <header class="mf-header">
+        <div class="mf-header-left">
+            <a href="página.principal.html" class="mf-brand">
+                <img class="mf-logo" src="Estilos/logo_master_finance.png" alt="Logo Master Finance">
+                <span class="mf-brand-title">Master Finance</span>
+            </a>
+            <span class="mf-page-badge">Perfil</span>
+        </div>
 
+        <div class="mf-user-area">
+            <div class="mf-user-info">
+                <span>Nombre</span>
+                <img src="Estilos/user-icon.png" alt="Icono de usuario">
+            </div>
+            <ul class="mf-nav-links">
+                <li><a href="página.principal.html">Inicio</a></li>
+                <li><a href="index.html">Cerrar Sesión</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="mf-layout">
+        <aside class="mf-sidebar">
+            <ul>
+                <li><a href="página.principal.html">Inicio</a></li>
+                <li><a href="ingresos.html">Ingresos</a></li>
+                <li><a href="gastos.html">Gastos</a></li>
+                <li><a href="ahorros.html">Ahorros</a></li>
+                <li><a href="metas.html">Metas</a></li>
+                <li><a href="presupuesto.html">Presupuesto</a></li>
+            </ul>
+
+            <div class="mf-sidebar-footer">
+                <a href="página.principal.html" class="mf-btn mf-btn-outline mf-btn-full">← Volver a Página Principal</a>
+            </div>
+        </aside>
+
+        <main class="mf-content">
+            <div class="mf-top-bar">
+                <h1>Mi Perfil</h1>
+                <a href="página.principal.html" class="mf-btn mf-btn-outline">Página Principal</a>
+            </div>
+
+            <div class="mf-grid-2">
+                <section class="mf-card">
+                    <h2>Foto de Perfil</h2>
+                    <div class="mf-avatar-box">
+                        <img class="mf-avatar-circle" src="Estilos/user-icon.png" alt="Foto de perfil">
+                    </div>
+
+                    <form action="php/actualizar_foto.php" method="POST" enctype="multipart/form-data">
+                        <div class="mf-form-group">
+                            <label for="fotoPerfil">Seleccionar nueva imagen:</label>
+                            <input type="file" id="fotoPerfil" name="fotoPerfil" class="mf-input" accept="image/*" required>
+                        </div>
+                        <button type="submit" class="mf-btn mf-btn-primary mf-btn-full">Actualizar Foto</button>
+                    </form>
+                </section>
+
+                <section class="mf-card">
+                    <h2>Información Personal</h2>
+                    <form action="php/actualizar_perfil.php" method="POST">
+                        <div class="mf-form-group">
+                            <label for="perfilNombre">Nombre completo:</label>
+                            <input type="text" id="perfilNombre" name="perfilNombre" class="mf-input" placeholder="Tu nombre" required>
+                        </div>
+
+                        <div class="mf-form-group">
+                            <label for="perfilCorreo">Correo electrónico:</label>
+                            <input type="email" id="perfilCorreo" name="perfilCorreo" class="mf-input" placeholder="correo@ejemplo.com" required>
+                        </div>
+
+                        <div class="mf-form-group">
+                            <label for="perfilMoneda">Moneda principal:</label>
+                            <select id="perfilMoneda" name="perfilMoneda" class="mf-select">
+                                <option value="COP">COP ($)</option>
+                                <option value="USD">USD ($)</option>
+                                <option value="EUR">EUR (€)</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="mf-btn mf-btn-primary mf-btn-full">Guardar Cambios</button>
+                    </form>
+                </section>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

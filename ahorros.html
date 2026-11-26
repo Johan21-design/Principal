@@ -1,313 +1,127 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Master Finance - Ahorros</title>
-
- <style>
- * {
- margin: 0;
- padding: 0;
- box-sizing: border-box;
- font-family: Arial, sans-serif;
- }
-
- body {
- background: #080808;
- color: white;
- min-height: 100vh;
- }
-
- header {
- padding: 20px 8%;
- display: flex;
- justify-content: space-between;
- align-items: center;
- border-bottom: 1px solid #292929;
- }
-
- .logo {
- display: flex;
- align-items: center;
- gap: 10px;
- }
-
- .logo img {
- width: 45px;
- height: 45px;
- object-fit: contain;
- }
-
- .logo h2 {
- font-size: 20px;
- }
-
- .logo span {
- color: #ed1c24;
- }
-
- header a {
- color: white;
- text-decoration: none;
- }
-
- main {
- max-width: 850px;
- margin: 50px auto;
- padding: 20px;
- }
-
- h1 {
- font-size: 30px;
- margin-bottom: 10px;
- }
-
- .descripcion {
- color: #aaa;
- margin-bottom: 30px;
- }
-
- .saldo, .meta, .formulario, .historial {
- background: #171717;
- padding: 25px;
- border-radius: 8px;
- margin-bottom: 25px;
- }
-
- .saldo {
- border-left: 4px solid #ed1c24;
- }
-
- .saldo p, .meta p {
- color: #aaa;
- margin-bottom: 12px;
- }
- .saldo h2 {
- font-size: 32px;
- color: #ed1c24;
- }
-
- h3 {
- margin-bottom: 18px;
- }
-
- .barra {
- width: 100%;
- height: 12px;
- background: #333;
- border-radius: 10px;
- overflow: hidden;
- margin: 15px 0;
- }
-
- .progreso {
- width: 0%;
- height: 100%;
- background: #ed1c24;
- transition: width .3s;
- }
-
- input {
- width: 100%;
- padding: 13px;
- margin-bottom: 15px;
- background: #080808;
- color: white;
- border: 1px solid #444;
- border-radius: 6px;
- outline: none;
- }
-
- input:focus {
- border-color: #ed1c24;
- }
-
- button {
- width: 100%;
- padding: 14px;
- background: #ed1c24;
- color: white;
- border: none;
- border-radius: 6px;
- cursor: pointer;
- font-size: 15px;
- }
-
- button:hover {
- background: #bd1018;
- }
-
- .movimiento {
- padding: 12px 0;
- border-bottom: 1px solid #333;
- display: flex;
- justify-content: space-between;
- gap: 10px;
- }
-
- .movimiento:last-child {
- border-bottom: none;
- }
-
- .cantidad {
- color: #ed1c24;
- }
-
- .vacio {
- color: #888;
- }
-
- @media (max-width: 600px) {
- main {
- margin: 25px auto;
- }
-
- header {
- padding: 18px 5%;
- }
- }
- </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahorros - Master Finance</title>
+    <link rel="stylesheet" href="Estilos/ahorros.css">
 </head>
+<body class="mf-body">
+    <header class="mf-header">
+        <div class="mf-header-left">
+            <a href="pag.principal.html" class="mf-brand">
+                <img class="mf-logo" src="Estilos/logo_master_finance.png" alt="Logo Master Finance">
+                <span class="mf-brand-title">Master Finance</span>
+            </a>
+            <span class="mf-page-badge">Ahorros</span>
+        </div>
 
-<body>
+        <div class="mf-user-area">
+            <div class="mf-user-info">
+                <span>Nombre</span>
+                <img src="Estilos/user-icon.png" alt="Usuario">
+            </div>
+            <ul class="mf-nav-links">
+                <li><a href="perfil.html">Perfil</a></li>
+                <li><a href="index.html">Cerrar Sesión</a></li>
+            </ul>
+        </div>
+    </header>
 
+    <<<<<<< HEAD    
  <header>
  <div class="logo">
  <img src="Estilos/logo_master_finance.png" alt="Logo">
  <h2>MASTER <span>FINANCE</span></h2>
  </div>
+=======
+    <div class="mf-layout">
+        <aside class="mf-sidebar">
+            <ul>
+                <li><a href="pag.principal.html">Inicio</a></li>
+                <li><a href="ingresos.html">Ingresos</a></li>
+                <li><a href="gastos.html">Gastos</a></li>
+                <li><a href="ahorros.html" class="active">Ahorros</a></li>
+                <li><a href="metas.html">Metas</a></li>
+                <li><a href="presupuesto.html">Presupuesto</a></li>
+            </ul>
+>>>>>>> bbf5e48 (Actualizacion de Master Finance)
 
- <a href="pag.principal.html">Volver</a>
- </header>
+            <div class="mf-balance-box">
+                <label for="total-ahorrado">Total Ahorrado:</label>
+                <input type="text" id="total-ahorrado" name="total-ahorrado" value="$0.00" readonly>
+            </div>
 
- <main>
- <h1>Mis ahorros</h1>
- <p class="descripcion">Organiza tu dinero y controla tus ahorros.</p>
+            <div style="margin-top: 14px;">
+                <a href="pag.principal.html" class="mf-btn mf-btn-outline mf-btn-full">← Volver a Página Principal</a>
+            </div>
+        </aside>
 
- <section class="saldo">
- <p>Total de dinero ahorrado</p>
- <h2 id="total">$0</h2>
- </section>
+        <main class="mf-content">
+            <div class="mf-top-bar">
+                <h1>Ahorros</h1>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="pag.principal.html" class="mf-btn mf-btn-outline">Página Principal</a>
+                    <a href="#form-ahorro" class="mf-btn mf-btn-primary">Ahorrar</a>
+                </div>
+            </div>
 
- <section class="meta">
- <h3>Mi meta de ahorro</h3>
- <p>Meta: <strong id="metaTexto">$0</strong></p>
+            <div class="mf-grid-2">
+                <section id="form-ahorro" class="mf-card">
+                    <h2>Registrar Movimiento de Ahorro</h2>
+                    <form action="php/guardar_ahorro.php" method="POST">
+                        <div class="mf-form-group">
+                            <label for="tipoMovimiento">Tipo de movimiento *</label>
+                            <select id="tipoMovimiento" name="tipoMovimiento" class="mf-select" required>
+                                <option value="ingreso">Ingreso al ahorro (+)</option>
+                                <option value="retiro">Saco del ahorro (-)</option>
+                            </select>
+                        </div>
 
- <div class="barra">
- <div class="progreso" id="progreso"></div>
- </div>
+                        <div class="mf-form-group">
+                            <label for="ahorMonto">Monto ($) *</label>
+                            <input type="number" id="ahorMonto" name="ahorMonto" class="mf-input" placeholder="$100" min="1" required>
+                        </div>
 
- <p id="porcentaje">0% completado</p>
+                        <div class="mf-form-group">
+                            <label for="ahorFecha">Fecha *</label>
+                            <input type="date" id="ahorFecha" name="ahorFecha" class="mf-input" required>
+                        </div>
 
- <input type="number" id="nuevaMeta"
- placeholder="Escribe tu meta de ahorro" min="1">
+                        <button type="submit" class="mf-btn mf-btn-primary mf-btn-full">Ahorrar</button>
+                    </form>
+                </section>
 
- <button onclick="establecerMeta()">Guardar meta</button>
- </section>
+                <section class="mf-card">
+                    <div class="mf-card-header">
+                        <h2>Historial</h2>
+                        <button type="button" class="mf-btn mf-btn-outline">Mostrar Historial</button>
+                    </div>
 
- <section class="formulario">
- <h3>Registrar ahorro</h3>
-
- <input type="number" id="cantidad"
- placeholder="Cantidad que deseas ahorrar" min="1">
-
- <input type="text" id="concepto"
- placeholder="Descripción del ahorro">
-
- <button onclick="registrarAhorro()">Agregar ahorro</button>
- </section>
-
- <section class="historial">
- <h3>Historial de ahorros</h3>
- <div id="historial">
- <p class="vacio">Todavía no tienes ahorros registrados.</p>
- </div>
- </section>
- </main>
-
- <script>
- let totalAhorrado = 0;
- let metaAhorro = 0;
-
- function actualizarPantalla() {
- document.getElementById("total").textContent =
- "$" + totalAhorrado.toLocaleString("es-CO");
-
- document.getElementById("metaTexto").textContent =
- "$" + metaAhorro.toLocaleString("es-CO");
-
- const porcentaje = metaAhorro > 0
- ? Math.min((totalAhorrado / metaAhorro) * 100, 100)
- : 0;
-
- document.getElementById("progreso").style.width =
- porcentaje + "%";
-
- document.getElementById("porcentaje").textContent =
- Math.round(porcentaje) + "% completado";
- }
-
- function establecerMeta() {
- const nuevaMeta = Number(
- document.getElementById("nuevaMeta").value
- );
-
- if (!Number.isFinite(nuevaMeta) || nuevaMeta <= 0) {
- alert("Ingresa una meta válida.");
- return;
- }
-
- metaAhorro = nuevaMeta;
- document.getElementById("nuevaMeta").value = "";
-
- actualizarPantalla();
- }
-
- function registrarAhorro() {
- const cantidad = Number(
- document.getElementById("cantidad").value
- );
-
- const concepto =
- document.getElementById("concepto").value.trim();
-
- if (!Number.isFinite(cantidad) || cantidad <= 0 || !concepto) {
- alert("Ingresa una cantidad válida y una descripción.");
- return;
- }
-
- totalAhorrado += cantidad;
-
- const historial = document.getElementById("historial");
-
- if (historial.querySelector(".vacio")) {
- historial.innerHTML = "";
- }
-
- const movimiento = document.createElement("div");
- movimiento.className = "movimiento";
-
- const nombre = document.createElement("span");
- nombre.textContent = concepto;
-
- const valor = document.createElement("strong");
- valor.className = "cantidad";
- valor.textContent =
- "+$" + cantidad.toLocaleString("es-CO");
-
- movimiento.append(nombre, valor);
- historial.prepend(movimiento);
-
- document.getElementById("cantidad").value = "";
- document.getElementById("concepto").value = "";
-
- actualizarPantalla();
- }
-
- actualizarPantalla();
- </script>
-
+                    <table class="mf-table">
+                        <thead>
+                            <tr>
+                                <th>Movimiento</th>
+                                <th>Fecha</th>
+                                <th>Monto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Saco del ahorro</td>
+                                <td>15/09/2026</td>
+                                <td class="mf-amount-minus">-$100</td>
+                            </tr>
+                            <tr>
+                                <td>Ingreso al ahorro</td>
+                                <td>12/09/2026</td>
+                                <td class="mf-amount-plus">$100</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </main>
+    </div>
 </body>
 </html>
-

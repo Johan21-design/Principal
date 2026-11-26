@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Meta - Master Finance</title>
+    <link rel="stylesheet" href="Estilos/metas.css">
+</head>
+<body class="mf-body">
+    <header class="mf-header">
+        <div class="mf-header-left">
+            <a href="página.principal.html" class="mf-brand">
+                <img class="mf-logo" src="Estilos/logo_master_finance.png" alt="Logo Master Finance">
+                <span class="mf-brand-title">Master Finance</span>
+            </a>
+            <span class="mf-page-badge">Nueva Meta</span>
+        </div>
+
+        <div class="mf-user-area">
+            <div class="mf-user-info">
+                <span>Nombre</span>
+                <img src="Estilos/user-icon.png" alt="Usuario">
+            </div>
+            <ul class="mf-nav-links">
+                <li><a href="página.principal.html">Inicio</a></li>
+                <li><a href="metas.html">Ver Metas</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="mf-layout">
+        <aside class="mf-sidebar">
+            <ul>
+                <li><a href="página.principal.html">Inicio</a></li>
+                <li><a href="ingresos.html">Ingresos</a></li>
+                <li><a href="gastos.html">Gastos</a></li>
+                <li><a href="ahorros.html">Ahorros</a></li>
+                <li><a href="metas.html" class="active">Metas</a></li>
+                <li><a href="presupuesto.html">Presupuesto</a></li>
+            </ul>
+        </aside>
+
+        <main class="mf-content">
+            <div class="mf-top-bar">
+                <h1>Crear Nueva Meta</h1>
+                <a href="metas.html" class="mf-btn mf-btn-outline">← Volver a Metas</a>
+            </div>
+
+            <section class="mf-card">
+                <h2>Información de la Meta</h2>
+                <form action="php/crear_meta.php" method="POST" enctype="multipart/form-data" class="mf-grid-2">
+                    <div>
+                        <div class="mf-form-group">
+                            <label for="metNombre">Nombre de la meta *</label>
+                            <input type="text" id="metNombre" name="metNombre" class="mf-input" placeholder="Ej: Moto o Fondo de Emergencia" required>
+                        </div>
+
+                        <div class="mf-form-group">
+                            <label for="metMontoObjetivo">Monto objetivo ($) *</label>
+                            <input type="number" id="metMontoObjetivo" name="metMontoObjetivo" class="mf-input" placeholder="100000" min="1" step="0.01" required>
+                        </div>
+
+                        <div class="mf-form-group">
+                            <label for="metImagen">Imagen de la meta *</label>
+                            <input type="file" id="metImagen" name="metImagen" class="mf-input" accept="image/*" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="mf-form-group">
+                            <label for="metFechaInicio">Fecha de inicio *</label>
+                            <input type="date" id="metFechaInicio" name="metFechaInicio" class="mf-input" required>
+                        </div>
+
+                        <div class="mf-form-group">
+                            <label for="metFechaFin">Fecha propuesta (fin) *</label>
+                            <input type="date" id="metFechaFin" name="metFechaFin" class="mf-input" required>
+                        </div>
+
+                        <div class="mf-form-group">
+                            <label for="metEstado">Estado</label>
+                            <select id="metEstado" name="metEstado" class="mf-select">
+                                <option value="En progreso">En progreso</option>
+                                <option value="Pendiente">Pendiente</option>
+                                <option value="Completada">Completada</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="mf-btn mf-btn-primary mf-btn-full">Guardar Meta</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

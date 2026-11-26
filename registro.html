@@ -1,1 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Master Finance</title>
+    <link rel="stylesheet" href="Estilos/registro.css">
+</head>
+<body class="mf-auth-body">
+    <div class="mf-auth-card registro-container">
+        <a href="index.html" class="mf-auth-brand">
+            <img class="mf-logo logo" src="Estilos/logo_master_finance.png" alt="Logo Master Finance">
+            <span class="mf-brand-title">Master Finance</span>
+        </a>
 
+        <h1>Crea tu cuenta</h1>
+        <p class="mf-auth-subtitle">Empieza a organizar tus finanzas hoy mismo</p>
+
+        <form action="php/registro.php" method="POST">
+            <div class="mf-form-group form-group">
+                <label for="nombre">Nombre completo:</label>
+                <input type="text" id="nombre" name="nombre" class="mf-input" placeholder="Tu nombre" required>
+            </div>
+
+            <div class="mf-form-group form-group">
+                <label for="correo">Correo electrónico:</label>
+                <input type="email" id="correo" name="correo" class="mf-input" placeholder="correo@ejemplo.com" required>
+            </div>
+
+            <div class="mf-form-group form-group">
+                <label for="contraseña">Contraseña:</label>
+                <input type="password" id="contraseña" name="contraseña" class="mf-input" placeholder="••••••••" required>
+            </div>
+
+            <div class="mf-form-group form-group">
+                <label for="confirmar_contraseña">Confirmar contraseña:</label>
+                <input type="password" id="confirmar_contraseña" name="confirmar_contraseña" class="mf-input" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="mf-btn mf-btn-primary mf-btn-full">Registrarse</button>
+        </form>
+
+        <p class="mf-auth-footer">
+            ¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a>
+        </p>
+    </div>
+</body>
+</html>
