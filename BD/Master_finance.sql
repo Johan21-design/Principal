@@ -1,10 +1,12 @@
-DROP DATABASE IF EXISTS master_finanza;
-CREATE DATABASE master_finanza;
-USE master_finanza;
+DROP DATABASE IF EXISTS Master_finance;
+CREATE DATABASE Master_finance;
+USE Master_finance;
 
--- 1. CREACIÓN DE TABLAS
+SET FOREIGN_KEY_CHECKS = 0;
 
-CREATE TABLE IF NOT EXISTS usuario(
+-- 1. CREACION DE TABLAS
+
+CREATE TABLE IF NOT EXISTS usuario (
     idUsuario INT NOT NULL AUTO_INCREMENT,
     usuNombre VARCHAR(100) NOT NULL,
     usuApellido VARCHAR(100) NOT NULL,
@@ -15,7 +17,7 @@ CREATE TABLE IF NOT EXISTS usuario(
     PRIMARY KEY (idUsuario)
 );
 
-CREATE TABLE IF NOT EXISTS administrador(
+CREATE TABLE IF NOT EXISTS administrador (
     idAdministrador INT NOT NULL AUTO_INCREMENT,
     adminNombre VARCHAR(100) NOT NULL,
     adminCorreo VARCHAR(100) NOT NULL,
@@ -25,7 +27,7 @@ CREATE TABLE IF NOT EXISTS administrador(
     FOREIGN KEY (usuAdministrador) REFERENCES usuario(idUsuario)
 );
 
-CREATE TABLE IF NOT EXISTS ingreso(
+CREATE TABLE IF NOT EXISTS ingreso (
     idIngreso INT NOT NULL AUTO_INCREMENT,
     ingMonto INT NOT NULL,
     ingFecha DATE NOT NULL,
@@ -35,7 +37,7 @@ CREATE TABLE IF NOT EXISTS ingreso(
     FOREIGN KEY (ingUsuario) REFERENCES usuario(idUsuario)
 );
 
-CREATE TABLE IF NOT EXISTS ahorro(
+CREATE TABLE IF NOT EXISTS ahorro (
     idAhorro INT NOT NULL AUTO_INCREMENT,
     ahorFecha DATE NOT NULL,
     ahorMonto INT NOT NULL,
@@ -44,7 +46,7 @@ CREATE TABLE IF NOT EXISTS ahorro(
     FOREIGN KEY (ahorUsuario) REFERENCES usuario(idUsuario)
 );
 
-CREATE TABLE IF NOT EXISTS gastos(
+CREATE TABLE IF NOT EXISTS gastos (
     idGasto INT NOT NULL AUTO_INCREMENT,
     gasFecha DATE NOT NULL,
     gasMonto INT NOT NULL,
@@ -55,14 +57,14 @@ CREATE TABLE IF NOT EXISTS gastos(
     FOREIGN KEY (gasUsuario) REFERENCES usuario(idUsuario)
 );
 
-CREATE TABLE IF NOT EXISTS meta(
+CREATE TABLE IF NOT EXISTS meta (
     idMeta INT NOT NULL AUTO_INCREMENT,
     metFechaInicio DATE NOT NULL,
     metFechaFin DATE NOT NULL,
     metMontoObjetivo INT NOT NULL,
     metEstado VARCHAR(100) NOT NULL,
     metNombre VARCHAR(100) NOT NULL,
-    metImagen VARCHAR(255) NULL, -- Ruta o URL de la imagen de la meta
+    metImagen VARCHAR(255) NULL,
     metUsuario INT NOT NULL,
     PRIMARY KEY (idMeta),
     FOREIGN KEY (metUsuario) REFERENCES usuario(idUsuario)
@@ -71,7 +73,8 @@ CREATE TABLE IF NOT EXISTS meta(
 
 -- 2. REGISTROS INICIALES
 
-INSERT INTO usuario (usuNombre, usuApellido, usuTelefono, usuCorreo, usuContraseña, usuAdministrador)
+INSERT INTO usuario
+(usuNombre, usuApellido, usuTelefono, usuCorreo, usuContraseña, usuAdministrador)
 VALUES
 ('Johan', 'Morales', '3001234567', 'johan@gmail.com', '123456', 1),
 ('Laura', 'Gomez', '3012345678', 'laura@gmail.com', '123456', 0),
@@ -84,11 +87,13 @@ VALUES
 ('Andres', 'Ramirez', '3089012345', 'andres@gmail.com', '123456', 0),
 ('Camila', 'Vargas', '3090123456', 'camila@gmail.com', '123456', 0);
 
-INSERT INTO administrador(adminNombre, adminCorreo, adminContraseña, usuAdministrador)
+INSERT INTO administrador
+(adminNombre, adminCorreo, adminContraseña, usuAdministrador)
 VALUES
 ('Administrador Principal', 'admin@finanzas.com', '123456', 1);
 
-INSERT INTO ingreso(ingMonto, ingFecha, ingDescripcion, ingUsuario)
+INSERT INTO ingreso
+(ingMonto, ingFecha, ingDescripcion, ingUsuario)
 VALUES
 (1500000, '2026-08-01', 'Salario', 1),
 (300000, '2026-08-10', 'Trabajo extra', 1),
@@ -103,7 +108,8 @@ VALUES
 (150000, '2026-08-27', 'Trabajo extra', 1),
 (500000, '2026-08-29', 'Pago adicional', 1);
 
-INSERT INTO ahorro(ahorFecha, ahorMonto, ahorUsuario)
+INSERT INTO ahorro
+(ahorFecha, ahorMonto, ahorUsuario)
 VALUES
 ('2026-08-05', 200000, 1),
 ('2026-08-15', 150000, 1),
@@ -118,7 +124,8 @@ VALUES
 ('2026-08-26', 200000, 1),
 ('2026-08-30', 100000, 1);
 
-INSERT INTO gastos(gasFecha, gasMonto, gasCategoria, gasNombre, gasUsuario)
+INSERT INTO gastos
+(gasFecha, gasMonto, gasCategoria, gasNombre, gasUsuario)
 VALUES
 ('2026-08-03', 50000, 'Alimentación', 'Almuerzo', 1),
 ('2026-08-06', 30000, 'Transporte', 'Bus', 1),
@@ -134,7 +141,8 @@ VALUES
 ('2026-08-25', 85000, 'Alimentación', 'Mercado', 1),
 ('2026-08-28', 40000, 'Entretenimiento', 'Salida con amigos', 1);
 
-INSERT INTO meta(metFechaInicio, metFechaFin, metMontoObjetivo, metEstado, metNombre, metImagen, metUsuario)
+INSERT INTO meta
+(metFechaInicio, metFechaFin, metMontoObjetivo, metEstado, metNombre, metImagen, metUsuario)
 VALUES
 ('2026-08-01', '2026-12-31', 2000000, 'En progreso', 'Comprar computador', 'img/metas/computador.jpg', 1),
 ('2026-08-01', '2026-10-31', 500000, 'En progreso', 'Comprar celular', 'img/metas/celular.jpg', 1),
@@ -149,12 +157,11 @@ VALUES
 ('2026-08-20', '2027-06-30', 10000000, 'Pendiente', 'Cuota inicial vivienda', 'img/metas/vivienda.jpg', 1);
 
 
--- 3. CREACIÓN DE PROCEDIMIENTOS ALMACENADOS
+-- 3. PROCEDIMIENTOS ALMACENADOS
 
 DROP PROCEDURE IF EXISTS sp_registrar_gasto;
 DROP PROCEDURE IF EXISTS sp_registrar_ingreso;
 DROP PROCEDURE IF EXISTS sp_gastos_por_categoria;
-DROP PROCEDURE IF EXISTS sp_estado_metas_usuario;
 DROP PROCEDURE IF EXISTS sp_crear_usuario;
 DROP PROCEDURE IF EXISTS sp_actualizar_usuario;
 DROP PROCEDURE IF EXISTS sp_actualizar_gasto;
@@ -164,7 +171,7 @@ DELIMITER //
 
 CREATE PROCEDURE sp_registrar_gasto(
     IN p_idUsuario INT,
-    IN p_monto DECIMAL(12,2),
+    IN p_monto INT,
     IN p_fecha DATE,
     IN p_categoria VARCHAR(100),
     IN p_nombre VARCHAR(100)
@@ -176,7 +183,7 @@ END //
 
 CREATE PROCEDURE sp_registrar_ingreso(
     IN p_idUsuario INT,
-    IN p_monto DECIMAL(12,2),
+    IN p_monto INT,
     IN p_fecha DATE,
     IN p_descripcion VARCHAR(100)
 )
@@ -191,12 +198,12 @@ CREATE PROCEDURE sp_gastos_por_categoria(
     IN p_fechaFin DATE
 )
 BEGIN
-    SELECT 
+    SELECT
         gasCategoria AS categoria,
         COUNT(idGasto) AS cantidad_transacciones,
         SUM(gasMonto) AS total_gastado
     FROM gastos
-    WHERE gasUsuario = p_idUsuario 
+    WHERE gasUsuario = p_idUsuario
       AND gasFecha BETWEEN p_fechaInicio AND p_fechaFin
     GROUP BY gasCategoria
     ORDER BY total_gastado DESC;
@@ -215,8 +222,10 @@ BEGIN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'El correo electrónico ya se encuentra registrado.';
     ELSE
-        INSERT INTO usuario (usuNombre, usuApellido, usuTelefono, usuCorreo, usuContraseña, usuAdministrador)
-        VALUES (p_nombre, p_apellido, p_telefono, p_correo, p_contraseña, p_es_administrador);
+        INSERT INTO usuario
+        (usuNombre, usuApellido, usuTelefono, usuCorreo, usuContraseña, usuAdministrador)
+        VALUES
+        (p_nombre, p_apellido, p_telefono, p_correo, p_contraseña, p_es_administrador);
 
         SELECT LAST_INSERT_ID() AS idUsuario, 'Usuario creado exitosamente' AS mensaje;
     END IF;
@@ -240,7 +249,7 @@ BEGIN
         SET MESSAGE_TEXT = 'Error: El correo electrónico ya pertenece a otro usuario.';
     ELSE
         UPDATE usuario
-        SET 
+        SET
             usuNombre = p_nombre,
             usuApellido = p_apellido,
             usuTelefono = p_telefono,
@@ -270,7 +279,7 @@ BEGIN
         SET MESSAGE_TEXT = 'Error: El gasto no pertenece al usuario especificado.';
     ELSE
         UPDATE gastos
-        SET 
+        SET
             gasMonto = p_monto,
             gasFecha = p_fecha,
             gasCategoria = p_categoria,
@@ -291,9 +300,11 @@ CREATE PROCEDURE sp_crear_meta(
     IN p_usuario INT
 )
 BEGIN
-    INSERT INTO meta (metFechaInicio, metFechaFin, metMontoObjetivo, metEstado, metNombre, metImagen, metUsuario)
-    VALUES (p_fechaInicio, p_fechaFin, p_montoObjetivo, p_estado, p_nombre, p_imagen, p_usuario);
-    
+    INSERT INTO meta
+    (metFechaInicio, metFechaFin, metMontoObjetivo, metEstado, metNombre, metImagen, metUsuario)
+    VALUES
+    (p_fechaInicio, p_fechaFin, p_montoObjetivo, p_estado, p_nombre, p_imagen, p_usuario);
+
     SELECT LAST_INSERT_ID() AS idMeta, 'Meta creada exitosamente' AS mensaje;
 END //
 
@@ -438,7 +449,8 @@ DETERMINISTIC
 READS SQL DATA
 BEGIN
     DECLARE total INT;
-    SELECT COALESCE(SUM(ingMonto), 0) INTO total FROM ingreso WHERE ingUsuario = p_usuario;
+    SELECT COALESCE(SUM(ingMonto), 0) INTO total
+    FROM ingreso WHERE ingUsuario = p_usuario;
     RETURN total;
 END$$
 
@@ -448,7 +460,8 @@ DETERMINISTIC
 READS SQL DATA
 BEGIN
     DECLARE total INT;
-    SELECT COALESCE(SUM(gasMonto), 0) INTO total FROM gastos WHERE gasUsuario = p_usuario;
+    SELECT COALESCE(SUM(gasMonto), 0) INTO total
+    FROM gastos WHERE gasUsuario = p_usuario;
     RETURN total;
 END$$
 
@@ -458,7 +471,8 @@ DETERMINISTIC
 READS SQL DATA
 BEGIN
     DECLARE total INT;
-    SELECT COALESCE(SUM(ahorMonto), 0) INTO total FROM ahorro WHERE ahorUsuario = p_usuario;
+    SELECT COALESCE(SUM(ahorMonto), 0) INTO total
+    FROM ahorro WHERE ahorUsuario = p_usuario;
     RETURN total;
 END$$
 
@@ -476,7 +490,8 @@ DETERMINISTIC
 READS SQL DATA
 BEGIN
     DECLARE cantidad INT;
-    SELECT COUNT(*) INTO cantidad FROM meta WHERE metUsuario = p_usuario;
+    SELECT COUNT(*) INTO cantidad
+    FROM meta WHERE metUsuario = p_usuario;
     RETURN cantidad;
 END$$
 
@@ -486,7 +501,8 @@ DETERMINISTIC
 READS SQL DATA
 BEGIN
     DECLARE total INT;
-    SELECT COALESCE(SUM(metMontoObjetivo), 0) INTO total FROM meta WHERE metUsuario = p_usuario;
+    SELECT COALESCE(SUM(metMontoObjetivo), 0) INTO total
+    FROM meta WHERE metUsuario = p_usuario;
     RETURN total;
 END$$
 
@@ -496,7 +512,8 @@ DETERMINISTIC
 READS SQL DATA
 BEGIN
     DECLARE cantidad INT;
-    SELECT COUNT(*) INTO cantidad FROM gastos WHERE gasUsuario = p_usuario;
+    SELECT COUNT(*) INTO cantidad
+    FROM gastos WHERE gasUsuario = p_usuario;
     RETURN cantidad;
 END$$
 
@@ -506,7 +523,8 @@ DETERMINISTIC
 READS SQL DATA
 BEGIN
     DECLARE cantidad INT;
-    SELECT COUNT(*) INTO cantidad FROM ingreso WHERE ingUsuario = p_usuario;
+    SELECT COUNT(*) INTO cantidad
+    FROM ingreso WHERE ingUsuario = p_usuario;
     RETURN cantidad;
 END$$
 
@@ -516,7 +534,8 @@ DETERMINISTIC
 READS SQL DATA
 BEGIN
     DECLARE promedio DECIMAL(15,2);
-    SELECT COALESCE(AVG(gasMonto), 0) INTO promedio FROM gastos WHERE gasUsuario = p_usuario;
+    SELECT COALESCE(AVG(gasMonto), 0) INTO promedio
+    FROM gastos WHERE gasUsuario = p_usuario;
     RETURN promedio;
 END$$
 
@@ -540,29 +559,39 @@ END$$
 
 DELIMITER ;
 
+SET FOREIGN_KEY_CHECKS = 1;
 
--- 6. PRUEBAS RÁPIDAS Y CONSULTAS
+
+-- 6. PRUEBAS RAPIDAS Y CONSULTAS (ejecútalas por separado en phpMyAdmin si ves #2014)
 
 CALL sp_gastos_por_categoria(1, '2026-08-01', '2026-08-31');
-CALL master_finanza.sp_actualizar_gasto(2, 5000, '2026-10-26', 'Alimentación', 'arroz con pollo de la esquina', 1);
-CALL master_finanza.sp_actualizar_usuario(5, 'Juan miguel', 'Rodriguez Perez', '13543523', 'juan23@gmail.com', 'arroz con pollo', 0);
-CALL master_finanza.sp_crear_meta('2026-10-07', '2027-10-07', 1000000, 'activo', 'el viaje soñado', 'img/metas/viaje_sonado.jpg', 5);
-CALL master_finanza.sp_crear_usuario('Jose Antonio ', 'Rodriguez Rodriguez', '32455465', 'josefito@gmail.com', 'pan con arroz', 0);
-CALL master_finanza.sp_registrar_gasto(5, 100000, '2026-09-26', 'Varios', 'cumpleaños');
-CALL master_finanza.sp_registrar_ingreso(1, 1750000, '2026-09-25', 'Salario');
 
--- Ver Triggers
-SHOW TRIGGERS FROM master_finanza;
+CALL sp_actualizar_gasto(2, 5000, '2026-10-26', 'Alimentación', 'arroz con pollo de la esquina', 1);
 
--- Consultas de prueba (Joins)
-SELECT 
-    usuario.idUsuario, usuario.usuNombre, usuario.usuApellido, 
-    ingreso.ingMonto, ingreso.ingFecha, ingreso.ingDescripcion
+CALL sp_actualizar_usuario(5, 'Juan miguel', 'Rodriguez Perez', '13543523', 'juan23@gmail.com', 'arroz con pollo', 0);
+
+CALL sp_crear_meta('2026-10-07', '2027-10-07', 1000000, 'activo', 'el viaje soñado', 'img/metas/viaje_sonado.jpg', 5);
+
+CALL sp_crear_usuario('Jose Antonio ', 'Rodriguez Rodriguez', '32455465', 'josefito@gmail.com', 'pan con arroz', 0);
+
+CALL sp_registrar_gasto(5, 100000, '2026-09-26', 'Varios', 'cumpleaños');
+
+CALL sp_registrar_ingreso(1, 1750000, '2026-09-25', 'Salario');
+
+SHOW TRIGGERS FROM Master_finance;
+
+SELECT
+    usuario.idUsuario,
+    usuario.usuNombre,
+    usuario.usuApellido,
+    ingreso.ingMonto,
+    ingreso.ingFecha,
+    ingreso.ingDescripcion
 FROM usuario
-INNER JOIN ingreso ON usuario.idUsuario = ingreso.ingUsuario;
+INNER JOIN ingreso
+ON usuario.idUsuario = ingreso.ingUsuario;
 
--- Metas "En Progreso" con imagen y datos de contacto del usuario
-SELECT 
+SELECT
     u.usuNombre,
     u.usuApellido,
     u.usuTelefono,
@@ -577,21 +606,15 @@ INNER JOIN meta m ON u.idUsuario = m.metUsuario
 WHERE m.metEstado = 'En progreso'
 ORDER BY m.metFechaFin ASC;
 
--- Resumen Consolidado por Usuario
-SELECT 
+SELECT
     u.idUsuario,
     u.usuNombre,
     u.usuApellido,
-    COALESCE(SUM(DISTINCT i.ingMonto), 0) AS TotalIngresos,
-    COALESCE(SUM(DISTINCT g.gasMonto), 0) AS TotalGastos,
-    COALESCE(SUM(DISTINCT a.ahorMonto), 0) AS TotalAhorros
-FROM usuario u
-LEFT JOIN ingreso i ON u.idUsuario = i.ingUsuario
-LEFT JOIN gastos g ON u.idUsuario = g.gasUsuario
-LEFT JOIN ahorro a ON u.idUsuario = a.ahorUsuario
-GROUP BY u.idUsuario, u.usuNombre, u.usuApellido;
+    total_ingresos(u.idUsuario) AS TotalIngresos,
+    total_gastos(u.idUsuario) AS TotalGastos,
+    total_ahorros(u.idUsuario) AS TotalAhorros
+FROM usuario u;
 
--- Probar Funciones
 SELECT total_ingresos(1) AS Total_Ingresos;
 SELECT saldo_disponible(1) AS Saldo_Disponible;
 SELECT porcentaje_ahorro(1) AS Porcentaje_Ahorro;

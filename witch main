@@ -1,0 +1,35 @@
+[33m< e01a86d[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Actualizacion de Master Finance
+[33m> b148b5a[m[33m ([m[1;31morigin/Elvis[m[33m)[m Implement form handling for metas submission
+[33m> 20988a9[m Create metas.php
+[33m> abc14ca[m Implement savings management features
+[33m> e7623ff[m Create ahorros.php
+[33m> 1fb8b39[m Remove PHP session handling and database logic
+[33m> 24966f9[m Implement savings management features in ahorros.html
+[33m< ce35f86[m Remove session management and saving logic from ahorros.php
+[33m< e2a6c87[m Implement savings management features
+[33m< ee64c25[m Create ahorros.php
+[33m< 9c25266[m Create metas.php
+[33m< 4eb573f[m Add style block to login.html
+[33m< 8bc52ca[m Update logo image source in login.html
+[33m< 4575dcd[m Update logo image source in ahorros.html
+[33m< e709f3e[m Update logo image source in ingresos.html
+[33m< f5d5cd7[m Update logo image source in index.html
+[33m> 8b8a8cf[m Add initial HTML structure for Master Finance page
+[33m< 0bef6d4[m Update index,html
+[33m< 467570d[m index.html
+[33m< 5e9b907[m gastos
+[33m< a2db2f6[m Create ahorros.css
+[33m< 9298fad[m Delete Estilos/imagen.png
+[33m< 7939d0c[m ingresos
+[33m< 3f22fda[m Add imagen.png to Estilos directory
+[33m< ce31773[m Create master_finanza database and initial schema
+[33m< 5a1277e[m Rename Diagrama to Documento/Diagrama de procesos
+[33m< d3731a4[m Create Diagrama
+[33m< 67933d1[m Create imagen
+[33m< 695d17d[m Create MYSQL
+[33m< b151fb8[m ahorros
+[33m< 055a2cd[m Add initial structure and styles for savings pag
+[33m< cb03303[m ndex
+[33m< 6fead98[m indice
+[33m< 4edbda9[m inicio de secion
+[33m< f69d96f[m pagina principal
